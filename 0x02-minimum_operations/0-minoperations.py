@@ -6,17 +6,9 @@ This modulescontains minOperations function.
 def minOperations(n);
     """
     Calculates the minimum number of operations to achieve n characters (H).
-
-    Args:
-        n: The target number of characters
-
-    Returns:
-        The minimum number of operations needed, or 0 if impossible.
     """
-
     if n <= 1:
         return 0
-
 
     operations = 0
     divisor = 2
