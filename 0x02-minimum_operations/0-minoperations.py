@@ -1,22 +1,30 @@
-#!/usr/bin/python3
+#!usr/bin/python3
 """
-This modulescontains minOperations function.
+The module Minimum Operations
 """
 
-def minOperations(n);
+def minOperations(n):
     """
     Calculates the minimum number of operations to achieve n characters (H).
     """
-    if n <= 1:
-        return 0
+    if not isinstance(n, int) or n <= 1:
+        return (0)
 
     operations = 0
-    divisor = 2
+    buffer_size = 0
+    current_size = 1
 
-    while n > 1:
-        while n % divisor == 0:
-            operations += divisor
-            n //= divisor
-        divisor += 1
+    while current_size < n:
+        if buffer_size == 0:
+            buffer_size = current_size
+            current_size += buffer_size
+            operations += 2
+        elif (n - current_size) % current_size == 0:
+            buffer_size = current_size
+            current_size += buffer_size
+            operations += 2
+        else:
+            current_size += buffer_size
+            operations += 1
 
-    return operations
+    return operations          
