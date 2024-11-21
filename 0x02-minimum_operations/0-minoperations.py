@@ -1,30 +1,35 @@
-#!usr/bin/python3
-"""
-The module Minimum Operations
-"""
+#!/usr/bin/python3
+'''The minimum operations coding challenge.
+'''
+
 
 def minOperations(n):
-    """
-    Calculates the minimum number of operations to achieve n characters (H).
-    """
-    if not isinstance(n, int) or n <= 1:
-        return (0)
-
-    operations = 0
-    buffer_size = 0
-    current_size = 1
-
-    while current_size < n:
-        if buffer_size == 0:
-            buffer_size = current_size
-            current_size += buffer_size
-            operations += 2
-        elif (n - current_size) % current_size == 0:
-            buffer_size = current_size
-            current_size += buffer_size
-            operations += 2
-        else:
-            current_size += buffer_size
-            operations += 1
-
-    return operations          
+    '''Computes the fewest number of operations needed to result
+    in exactly n H characters.
+    '''
+    if not isinstance(n, int):
+        return 0
+    ops_count = 0
+    clipboard = 0
+    done = 1
+    # print('H', end='')
+    while done < n:
+        if clipboard == 0:
+            # init (the first copy all and paste)
+            clipboard = done
+            done += clipboard
+            ops_count += 2
+            # print('-(11)->{}'.format('H' * done), end='')
+        elif n - done > 0 and (n - done) % done == 0:
+            # copy all and paste
+            clipboard = done
+            done += clipboard
+            ops_count += 2
+            # print('-(11)->{}'.format('H' * done), end='')
+        elif clipboard > 0:
+            # paste
+            done += clipboard
+            ops_count += 1
+            # print('-(01)->{}'.format('H' * done), end='')
+    # print('')
+    return ops_count
